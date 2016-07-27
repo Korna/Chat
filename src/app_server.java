@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
@@ -12,16 +13,20 @@ import java.net.Socket;
  */
 public class app_server {
 
-    static public String message_in = null;
-    static public String message_ou = null;
+    static public String message_in = "";
+    static public String message_ou = "";
     static public String History = "";
+    static public int port = 666;
+
 
     public static void main(String[] args) {
+
+
         Server myserver = new Server();
 
 
         try {
-            int port = 666;
+
             ServerSocket ss = new ServerSocket(port); // создаем сокет сервера и привязываем его к вышеуказанному порту
 
             History += "Waiting for a client...\n";
@@ -64,24 +69,29 @@ public class app_server {
 
                     }
                 });
-        /*
-                out.writeUTF(message_ou); // отсылаем клиенту обратно ту самую строку текста.
-                out.flush(); // заставляем поток закончить передачу данных.
-                History += "Server: " + message_ou + "\n";
-                myserver.text_history.setText(History);
-                */
+
+
+                myserver.button_ip.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            port = Integer.parseInt(myserver.text_port.getText());
+                            myserver.label_port.setText(myserver.text_port.getText());
+                            myserver.label_port.setEnabled(true);
+                    } catch(Exception ex){};
+                    }
+                });
+
             }
+
+
         } catch(Exception x) { x.printStackTrace(); }
 
-    }
-
-
-    public app_server(){
-
-
-
+        JOptionPane.showMessageDialog(null, "User lost");
 
     }
+
+
 
 
 }

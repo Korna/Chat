@@ -10,22 +10,29 @@ import java.io.*;
 
 public class Server extends JFrame{
 
-    private JPanel panel_main;
     public JTextArea text_history;
     public JButton button_send;
     public JTextField text_send;
+    public JTextField text_port;
+    public JButton button_ip;
+    public JLabel label_port;
+    private JPanel panel_main;
     private JButton button_reconnect;
+    private JScrollPane scroll_history;
 
 
     public Server(){
         super("Server side.");
-
+        scroll_history.setViewportView(text_history);
         setContentPane(panel_main);
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
+
+
+        label_port.setText(Integer.toString(app_server.port));
 
     }
 
